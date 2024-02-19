@@ -48,7 +48,7 @@ export default function SearchScreen({ navigation }) {
         onSearchTermChange={setSearchTerm}
         onSubmit={searchBusinesses}
       />
-      <Text>We have found { businesses.length } results.</Text>
+      <Text>We have founddd { businesses.length } results.</Text>
       <BusinessesContext.Provider value={businesses}>
         <BusinessList />
       </BusinessesContext.Provider>
