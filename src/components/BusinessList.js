@@ -16,7 +16,7 @@ export default function BusinessList(props) {
         style={styles.listStyle}
         contentContainerStyle={{ gap: 10 }}
         ListHeaderComponent={
-          businesses.length === 0 ? null : <Text>Header</Text>
+          businesses.length === 0 ? null : <Text style={styles.listHeader}>Results</Text>
         }
         renderItem={({ item }) => (
           <TouchableOpacity>
@@ -34,5 +34,8 @@ const styles = StyleSheet.create({
   },
   listStyle: {
     marginTop: 10,
+  },
+  listHeader: {
+    fontSize: 24,
   }
 });

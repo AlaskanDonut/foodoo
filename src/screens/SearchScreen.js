@@ -1,55 +1,35 @@
-import { useReducer, useState } from 'react';
+import { useReducer, useState, useEffect } from 'react';
 import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
 // Components
 import SearchBar from '../components/SearchBar';
 import BusinessList from '../components/BusinessList';
 // Contexts
 import { BusinessesContext } from '../contexts/BusinessesContext';
+// Reducers
+import { businessesReducer } from '../reducers/businessesReducer';
+// Hooks
+import useBusinessSearch from '../hooks/useBusinessSearch';
 // APIs
 import yelp from '../api/yelp';
 
-const businessesReducer = (state, action) => {
-  switch(action.type) {
-    case 'ADD_BUSINESS':
-      return action.payload;
-      console.log('add_business called')
-      break;
-    default:
-      return null;
-  }
-}
-
 export default function SearchScreen({ navigation }) {
+  const [hasSearched, setHasSearched] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
-  const [businesses, businessesDispatch] = useReducer(businessesReducer, [])
-
-  const searchBusinesses = async () => {
-    console.log(businesses[5]);
-    try {
-      const response = await yelp.get('/search', {
-        params: {
-          term: searchTerm,
-          limit: 50,
-          location: 'new york'
-        }
-      });
-      console.log(response.data.businesses)
-      businessesDispatch({ type: 'ADD_BUSINESS', payload: response.data.businesses })
-    } catch (err) {
-      setErrorMessage('Something went wrong.');
-    }
-  }
+  const [
+    searchApi,
+    errorMessage,
+    results
+  ] = useBusinessSearch();
 
   return (
     <View style={styles.container}>
       <SearchBar
         searchTerm={searchTerm}
         onSearchTermChange={setSearchTerm}
-        onSubmit={searchBusinesses}
+        onSubmit={() => searchApi(searchTerm)}
       />
-      <Text>We have founddd { businesses.length } results.</Text>
-      <BusinessesContext.Provider value={businesses}>
+      { hasSearched ? <Text>Showing {businesses.length} results.</Text> : null }
+      <BusinessesContext.Provider value={results}>
         <BusinessList />
       </BusinessesContext.Provider>
       { errorMessage ? <Text>{errorMessage}</Text> : null }
