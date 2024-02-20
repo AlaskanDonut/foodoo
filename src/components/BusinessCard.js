@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, Image } from 'react-native';
 export default function BusinessCard(props) {
   return (
     <View style={styles.container} >
-      <Image style={styles.image} source={{ uri: props.image}} />
+      <Image style={styles.image} source={require('../images/img.jpg')} />
       <Text>{props.name}</Text>
     </View>
   );
@@ -24,8 +24,8 @@ const styles = StyleSheet.create({
     shadowOpacity: .1,
   },
   image: {
+    height: 20,
     alignContent: 'stretch',
-    backgroundColor: 'blue'
   }
 })
 

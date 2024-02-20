@@ -4,6 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 // Screens
 import HomeScreen from './src/screens/HomeScreen';
 import SearchScreen from './src/screens/SearchScreen';
+import BusinessScreen from './src/screens/BusinessScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -23,6 +24,13 @@ export default function App() {
           component={ SearchScreen }
           options={{
             title: 'Search Voodoo'
+          }}
+        />
+        <Stack.Screen 
+          name="Business"
+          component={ BusinessScreen }
+          options={{
+            title: 'Profile'
           }}
         />
       </Stack.Navigator>

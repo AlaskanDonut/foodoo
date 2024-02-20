@@ -1,22 +1,24 @@
 import { useContext } from 'react';
 import { StyleSheet, Text, View, TextInput, FlatList, TouchableOpacity } from 'react-native';
-// Contexts
-import { BusinessesContext } from '../contexts/BusinessesContext';
 // Components
 import BusinessCard from './BusinessCard';
 
-export default function BusinessList(props) {
-  const businesses = useContext(BusinessesContext);
+export default function BusinessList({ title, businesses }) {
 
   return (
     <View style={styles.container}>
-      <Text>BusinessList</Text>
       <FlatList
         data={businesses}
-        style={styles.listStyle}
+        style={styles.list}
+        keyExtractor={result => result.id}
         contentContainerStyle={{ gap: 10 }}
         ListHeaderComponent={
-          businesses.length === 0 ? null : <Text style={styles.listHeader}>Results</Text>
+          businesses.length > 0 ?
+            <View style={styles.headerContainer}>
+              <Text style={styles.headerPrimary}>{title}</Text>
+              <Text style={styles.headerSecondary}>{businesses.length}</Text>
+            </View> :
+            null
         }
         renderItem={({ item }) => (
           <TouchableOpacity>
@@ -30,12 +32,22 @@ export default function BusinessList(props) {
 
 const styles = StyleSheet.create({
   container: {
-    marginBottom: 20,
+    marginVertical: 20,
   },
-  listStyle: {
+  list: {
     marginTop: 10,
   },
-  listHeader: {
+  headerContainer: {
+    flexDirection: 'row',
+    alignItems: 'flex-end',
+  },
+  headerPrimary: {
     fontSize: 24,
+    fontWeight: 'bold',
+  },
+  headerSecondary: {
+    fontSize: 18,
+    left: 10,
+    bottom: 2,
   }
 });

@@ -1,19 +1,14 @@
-import { useReducer, useState, useEffect } from 'react';
-import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
+import { useState } from 'react';
+import { StyleSheet, Text, View } from 'react-native';
 // Components
 import SearchBar from '../components/SearchBar';
 import BusinessList from '../components/BusinessList';
 // Contexts
 import { BusinessesContext } from '../contexts/BusinessesContext';
-// Reducers
-import { businessesReducer } from '../reducers/businessesReducer';
 // Hooks
 import useBusinessSearch from '../hooks/useBusinessSearch';
-// APIs
-import yelp from '../api/yelp';
 
 export default function SearchScreen({ navigation }) {
-  const [hasSearched, setHasSearched] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [
     searchApi,
@@ -28,9 +23,8 @@ export default function SearchScreen({ navigation }) {
         onSearchTermChange={setSearchTerm}
         onSubmit={() => searchApi(searchTerm)}
       />
-      { hasSearched ? <Text>Showing {businesses.length} results.</Text> : null }
       <BusinessesContext.Provider value={results}>
-        <BusinessList />
+        <BusinessList title="Results" businesses={results} />
       </BusinessesContext.Provider>
       { errorMessage ? <Text>{errorMessage}</Text> : null }
     </View>
