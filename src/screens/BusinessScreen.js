@@ -1,4 +1,4 @@
-import { View, Text, Stylesheet } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 
 export default function BusinessScreen(props) {
   return (
@@ -8,6 +8,6 @@ export default function BusinessScreen(props) {
   );
 }
 
-const styles = Stylesheet.create({
+const styles = StyleSheet.create({
   
 })

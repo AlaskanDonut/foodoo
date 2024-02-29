@@ -1,10 +1,14 @@
 import { StyleSheet, Text, View, Image } from 'react-native';
 
-export default function BusinessCard(props) {
+export default function BusinessCard({ name, image }) {
   return (
     <View style={styles.container} >
-      <Image style={styles.image} source={require('../images/img.jpg')} />
-      <Text>{props.name}</Text>
+      <Image
+        style={styles.image}
+        source={{ uri: `${image}` }}
+        defaultSource={require('../images/img.jpg')}
+      />
+      <Text>{name}</Text>
     </View>
   );
 }

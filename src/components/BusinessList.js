@@ -20,6 +20,7 @@ export default function BusinessList({ title, businesses }) {
             </View> :
             null
         }
+        horizontal={true}
         renderItem={({ item }) => (
           <TouchableOpacity>
             <BusinessCard name={item.name} image={item.image_url} />
@@ -36,10 +37,12 @@ const styles = StyleSheet.create({
   },
   list: {
     marginTop: 10,
+    backgroundColor: 'green'
   },
   headerContainer: {
     flexDirection: 'row',
     alignItems: 'flex-end',
+    backgroundColor: 'gray',
   },
   headerPrimary: {
     fontSize: 24,
@@ -47,7 +50,5 @@ const styles = StyleSheet.create({
   },
   headerSecondary: {
     fontSize: 18,
-    left: 10,
-    bottom: 2,
   }
 });

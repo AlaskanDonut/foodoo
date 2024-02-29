@@ -37,11 +37,3 @@ export default function App() {
     </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  
-});
-
-// Yelp Fusion details.
-// Client ID: vIs4635BGW473ifxk-2aaw
-// API Key: 9SQA3KieKavCp1h1EEHjAd5B_bKKNHB1kFnojMtMYuwqT3UfH9IZ57dyiaD9-zaa1Swmkeay-3CuhLgrmCD6TGzM17Go63aCA8VAARfimmz7O0vTgErVLIl33QrNZXYx 
