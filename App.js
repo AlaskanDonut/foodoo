@@ -23,7 +23,7 @@ export default function App() {
           name="Search"
           component={ SearchScreen }
           options={{
-            title: 'Search Voodoo'
+            title: 'Search Foodoo'
           }}
         />
         <Stack.Screen 

@@ -7,42 +7,40 @@ export default function BusinessList({ title, businesses }) {
 
   return (
     <View style={styles.container}>
-      <FlatList
-        data={businesses}
-        style={styles.list}
-        keyExtractor={result => result.id}
-        contentContainerStyle={{ gap: 10 }}
-        ListHeaderComponent={
-          businesses.length > 0 ?
-            <View style={styles.headerContainer}>
+      { businesses.length > 0 ?
+        <>
+          <View style={styles.headerContainer}>
               <Text style={styles.headerPrimary}>{title}</Text>
               <Text style={styles.headerSecondary}>{businesses.length}</Text>
-            </View> :
-            null
-        }
-        horizontal={true}
-        renderItem={({ item }) => (
-          <TouchableOpacity>
-            <BusinessCard name={item.name} image={item.image_url} />
-          </TouchableOpacity>
-        )}
-      />
+          </View>
+          <FlatList
+            data={businesses}
+            style={styles.list}
+            keyExtractor={result => result.id}
+            contentContainerStyle={{ gap: 10 }}
+            horizontal={true}
+            showsHorizontalScrollIndicator={false}
+            renderItem={({ item }) => (
+              <TouchableOpacity>
+                <BusinessCard name={item.name} image={item.image_url} rating={item.rating} />
+              </TouchableOpacity>
+            )}
+          />
+        </> : null }
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    marginVertical: 20,
-  },
-  list: {
-    marginTop: 10,
-    backgroundColor: 'green'
+    marginBottom: 20,
+    flexDirection: 'column',
   },
   headerContainer: {
     flexDirection: 'row',
     alignItems: 'flex-end',
-    backgroundColor: 'gray',
+    // backgroundColor: 'gray',
+    paddingLeft: 20,
   },
   headerPrimary: {
     fontSize: 24,
@@ -50,5 +48,12 @@ const styles = StyleSheet.create({
   },
   headerSecondary: {
     fontSize: 18,
-  }
+    bottom: 2,
+    left: 4
+  },
+  list: {
+    paddingLeft: 20,
+    paddingVertical: 10,
+    // backgroundColor: 'green'
+  },
 });

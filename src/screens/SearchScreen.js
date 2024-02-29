@@ -16,17 +16,29 @@ export default function SearchScreen({ navigation }) {
     results
   ] = useBusinessSearch();
 
+  const filterByPrice = (items, price) => {
+    return items.filter(business => business.price === price);
+  }
+
   return (
-    <View style={styles.container}>
-      <SearchBar
-        searchTerm={searchTerm}
-        onSearchTermChange={setSearchTerm}
-        onSubmit={() => searchApi(searchTerm)}
-      />
-      <BusinessesContext.Provider value={results}>
-        <BusinessList title="Results" businesses={results} />
-      </BusinessesContext.Provider>
-      { errorMessage ? <Text>{errorMessage}</Text> : null }
+    <View>
+      <View style={[styles.container, { marginBottom: 20 }]}>
+        <SearchBar
+          searchTerm={searchTerm}
+          onSearchTermChange={setSearchTerm}
+          onSubmit={() => searchApi(searchTerm)}
+        />
+      </View>
+      <View style={styles.overflowContainer}>
+        <BusinessesContext.Provider value={results}>
+          <BusinessList title="Afforable" businesses={filterByPrice(results, '$')} />
+          <BusinessList title="Reasonable" businesses={filterByPrice(results, '$$')} />
+          <BusinessList title="Expensive" businesses={filterByPrice(results, '$$$')} />
+        </BusinessesContext.Provider>
+      </View>
+      <View style={styles.container}>
+        { errorMessage ? <Text>{errorMessage}</Text> : null }
+      </View>
     </View>
   );
 }
@@ -37,4 +49,6 @@ const styles = StyleSheet.create({
     paddingTop: 20,
     flexDirection: 'column',
   },
+  overflowContainer: {
+  }
 });
