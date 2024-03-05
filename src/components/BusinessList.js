@@ -1,9 +1,12 @@
 import { useContext } from 'react';
 import { StyleSheet, Text, View, TextInput, FlatList, TouchableOpacity } from 'react-native';
+// React Navigation
+import { useNavigation } from '@react-navigation/native';
 // Components
 import BusinessCard from './BusinessCard';
 
 export default function BusinessList({ title, businesses }) {
+  const navigation = useNavigation();
 
   return (
     <View style={styles.container}>
@@ -21,7 +24,9 @@ export default function BusinessList({ title, businesses }) {
             horizontal={true}
             showsHorizontalScrollIndicator={false}
             renderItem={({ item }) => (
-              <TouchableOpacity>
+              <TouchableOpacity onPress={() => navigation.push('Business', {
+                businessId: item.id
+              })}>
                 <BusinessCard name={item.name} image={item.image_url} rating={item.rating} />
               </TouchableOpacity>
             )}

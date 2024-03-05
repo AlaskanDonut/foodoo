@@ -30,7 +30,7 @@ export default function App() {
           name="Business"
           component={ BusinessScreen }
           options={{
-            title: 'Profile'
+            title: 'Business'
           }}
         />
       </Stack.Navigator>

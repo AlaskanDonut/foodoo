@@ -1,9 +1,21 @@
-import { View, Text, StyleSheet } from 'react-native';
+import { useEffect } from 'react';
+import { View, Text, Button, StyleSheet } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import useBusiness from '../hooks/useBusiness';
+ 
+export default function BusinessScreen({ navigation, route }) {
+  const { businessId } = route.params;
+  
+  const [ businessSearchApi,
+    errorMessage,
+    businessResult ] = useBusiness();
 
-export default function BusinessScreen(props) {
+  useEffect(() => businessSearchApi(businessId), [businessId]);
+  
   return (
     <View>
-      <Text>BusinessScreen.js asdasd</Text>
+      <Text>BusinessScreen.js</Text>
+      <Text>{businessResult.name}</Text>
     </View>
   );
 }
